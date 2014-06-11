@@ -67,7 +67,8 @@ class ExtensionInstaller extends LibraryInstaller
      */
     public function getInstallPath(PackageInterface $package)
     {
-        return 'tmp/' . $package->getPrettyName();
+        $config = $this->_config->get('joomla');
+        return (isset($config['basedir']) ? $config['basedir'] . '/' : '') . 'tmp/' . $package->getPrettyName();
     }
 
     /**
@@ -166,7 +167,7 @@ class ExtensionInstaller extends LibraryInstaller
             define('_JEXEC', 1);
             define('DS', DIRECTORY_SEPARATOR);
 
-            define('JPATH_BASE', realpath('.') . (isset($config['basedir']) ? $config['basedir'] : ''));
+            define('JPATH_BASE', realpath('.') . (isset($config['basedir']) ? '/' . $config['basedir'] : ''));
             require_once JPATH_BASE . '/includes/defines.php';
 
             require_once JPATH_BASE . '/includes/framework.php';
