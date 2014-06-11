@@ -156,6 +156,8 @@ class ExtensionInstaller extends LibraryInstaller
      */
     protected function _bootstrap()
     {
+        $config = $this->_config->get('joomla');
+        
         if(!defined('_JEXEC'))
         {
             $_SERVER['HTTP_HOST']   = 'localhost';
@@ -164,7 +166,7 @@ class ExtensionInstaller extends LibraryInstaller
             define('_JEXEC', 1);
             define('DS', DIRECTORY_SEPARATOR);
 
-            define('JPATH_BASE', realpath('.'));
+            define('JPATH_BASE', realpath('.') . (isset($config['basedir']) ? $config['basedir'] : ''));
             require_once JPATH_BASE . '/includes/defines.php';
 
             require_once JPATH_BASE . '/includes/framework.php';
