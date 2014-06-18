@@ -176,7 +176,6 @@ class ExtensionInstaller extends LibraryInstaller
         		define('JPATH_COMPONENT', JPATH_BASE . '/' . $config['component-symlink']);
         		define('JPATH_COMPONENT_SITE', JPATH_SITE . '/' . $config['component-symlink']);
         		define('JPATH_COMPONENT_ADMINISTRATOR', JPATH_ADMINISTRATOR . '/' . $config['component-symlink']);
-        		var_dump($config);
             }
             
             require_once JPATH_BASE . '/includes/framework.php';
