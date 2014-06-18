@@ -168,6 +168,8 @@ class ExtensionInstaller extends LibraryInstaller
             define('DS', DIRECTORY_SEPARATOR);
 
             define('JPATH_BASE', realpath('.') . (isset($config['basedir']) ? '/' . $config['basedir'] : ''));
+            require_once JPATH_BASE . '/includes/defines.php';
+
             
             if (isset($config['component-symlink']) && is_string($config['component-symlink'])) {
         		// Define component path.
@@ -177,8 +179,6 @@ class ExtensionInstaller extends LibraryInstaller
         		var_dump($config);
             }
             
-            require_once JPATH_BASE . '/includes/defines.php';
-
             require_once JPATH_BASE . '/includes/framework.php';
             require_once JPATH_LIBRARIES . '/import.php';
 
