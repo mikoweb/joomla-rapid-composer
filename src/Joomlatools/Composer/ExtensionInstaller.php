@@ -174,6 +174,13 @@ class ExtensionInstaller extends LibraryInstaller
             require_once JPATH_LIBRARIES . '/import.php';
 
             require_once JPATH_LIBRARIES . '/cms.php';
+            
+            if (isset($config['component-symlink']) && is_string($config['component-symlink'])) {
+        		// Define component path.
+        		define('JPATH_COMPONENT', JPATH_BASE . '/' . $config['component-symlink']);
+        		define('JPATH_COMPONENT_SITE', JPATH_SITE . '/' . $config['component-symlink']);
+        		define('JPATH_COMPONENT_ADMINISTRATOR', JPATH_ADMINISTRATOR . '/' . $config['component-symlink']);                                
+            }
         }
 
         if(!($this->_application instanceof Application))
