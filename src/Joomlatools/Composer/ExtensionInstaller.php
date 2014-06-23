@@ -146,7 +146,7 @@ class ExtensionInstaller extends LibraryInstaller
         if($manifest)
         {
             $type    = (string) $manifest->attributes()->type;
-            $element = $this->_getElementFromManifest($manifest);
+            $element = $this->getElementFromManifest($manifest);
             
             return !empty($element) ? $this->_application->hasExtension($element, $type) : false;
         }
@@ -165,7 +165,7 @@ class ExtensionInstaller extends LibraryInstaller
 
         if($manifest) {
             $type    = (string) $manifest->attributes()->type;
-            $element = $this->_getElementFromManifest($manifest);
+            $element = $this->getElementFromManifest($manifest);
 
             if ($type == 'component') {
                 // Define component path.
@@ -252,7 +252,7 @@ class ExtensionInstaller extends LibraryInstaller
         }
     }
 
-    protected function _getElementFromManifest($manifest)
+    public function getElementFromManifest($manifest)
     {
         $element    = '';
         $type       = (string) $manifest->attributes()->type;
