@@ -170,19 +170,6 @@ class ExtensionInstaller extends LibraryInstaller
             define('JPATH_BASE', realpath('.') . (isset($config['basedir']) ? '/' . $config['basedir'] : ''));
             require_once JPATH_BASE . '/includes/defines.php';
 
-            
-            $manifest = $installer->getManifest();
-            if ($manifest) {
-                $type    = (string) $manifest->attributes()->type;
-                $element = $this->_getElementFromManifest($manifest);
-                if ($type == 'component') {
-                    // Define component path.
-                    define('JPATH_COMPONENT', JPATH_BASE . '/components/' . $element);
-                    define('JPATH_COMPONENT_SITE', JPATH_SITE . '/components/' . $element);
-                    define('JPATH_COMPONENT_ADMINISTRATOR', JPATH_ADMINISTRATOR . '/components/' . $element);
-                }
-            }
-            
             require_once JPATH_BASE . '/includes/framework.php';
             require_once JPATH_LIBRARIES . '/import.php';
 
@@ -195,6 +182,26 @@ class ExtensionInstaller extends LibraryInstaller
 
             $this->_application = new Application($options);
             $this->_application->authenticate($this->_credentials);
+
+            $installer = $this->_application->getInstaller();
+            $manifest = $installer->getManifest();
+
+            if ($manifest) {
+                $type    = (string) $manifest->attributes()->type;
+                $element = $this->_getElementFromManifest($manifest);
+                if ($type == 'component') {
+                    // Define component path.
+                    if(!defined('JPATH_COMPONENT')) {
+                        define('JPATH_COMPONENT', JPATH_BASE . '/components/' . $element);
+                    }
+                    if(!defined('JPATH_COMPONENT_SITE')) {
+                        define('JPATH_COMPONENT_SITE', JPATH_SITE . '/components/' . $element);
+                    }
+                    if(!defined('JPATH_COMPONENT_ADMINISTRATOR')) {
+                        define('JPATH_COMPONENT_ADMINISTRATOR', JPATH_ADMINISTRATOR . '/components/' . $element);
+                    }
+                }
+            }            
         }
     }
 
