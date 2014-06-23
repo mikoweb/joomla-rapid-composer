@@ -143,7 +143,20 @@ class ExtensionInstaller extends LibraryInstaller
         {
             $type    = (string) $manifest->attributes()->type;
             $element = $this->_getElementFromManifest($manifest);
-
+            
+            if ($type == 'component') {
+                // Define component path.
+                if(!defined('JPATH_COMPONENT')) {
+                    define('JPATH_COMPONENT', JPATH_BASE . '/components/' . $element);
+                }
+                if(!defined('JPATH_COMPONENT_SITE')) {
+                    define('JPATH_COMPONENT_SITE', JPATH_SITE . '/components/' . $element);
+                }
+                if(!defined('JPATH_COMPONENT_ADMINISTRATOR')) {
+                    define('JPATH_COMPONENT_ADMINISTRATOR', JPATH_ADMINISTRATOR . '/components/' . $element);
+                }
+            }
+            
             return !empty($element) ? $this->_application->hasExtension($element, $type) : false;
         }
 
@@ -182,26 +195,6 @@ class ExtensionInstaller extends LibraryInstaller
 
             $this->_application = new Application($options);
             $this->_application->authenticate($this->_credentials);
-
-            $installer = $this->_application->getInstaller();
-            $manifest = $installer->getManifest();
-
-            if ($manifest) {
-                $type    = (string) $manifest->attributes()->type;
-                $element = $this->_getElementFromManifest($manifest);
-                if ($type == 'component') {
-                    // Define component path.
-                    if(!defined('JPATH_COMPONENT')) {
-                        define('JPATH_COMPONENT', JPATH_BASE . '/components/' . $element);
-                    }
-                    if(!defined('JPATH_COMPONENT_SITE')) {
-                        define('JPATH_COMPONENT_SITE', JPATH_SITE . '/components/' . $element);
-                    }
-                    if(!defined('JPATH_COMPONENT_ADMINISTRATOR')) {
-                        define('JPATH_COMPONENT_ADMINISTRATOR', JPATH_ADMINISTRATOR . '/components/' . $element);
-                    }
-                }
-            }            
         }
     }
 
