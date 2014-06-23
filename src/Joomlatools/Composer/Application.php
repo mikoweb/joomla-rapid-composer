@@ -388,4 +388,12 @@ class Application extends JApplicationCli
 
         return $router;
     }
+    
+    /**
+     * @param string $url
+     * @param string $msg
+     * @param string $msgType
+     */
+    public function redirect($url, $msg='', $msgType='message') 
+    {}
 }
