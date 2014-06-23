@@ -171,11 +171,16 @@ class ExtensionInstaller extends LibraryInstaller
             require_once JPATH_BASE . '/includes/defines.php';
 
             
-            if (isset($config['component-symlink']) && is_string($config['component-symlink'])) {
-        		// Define component path.
-        		define('JPATH_COMPONENT', JPATH_BASE . '/' . $config['component-symlink']);
-        		define('JPATH_COMPONENT_SITE', JPATH_SITE . '/' . $config['component-symlink']);
-        		define('JPATH_COMPONENT_ADMINISTRATOR', JPATH_ADMINISTRATOR . '/' . $config['component-symlink']);
+            $manifest = $installer->getManifest();
+            if ($manifest) {
+                $type    = (string) $manifest->attributes()->type;
+                $element = $this->_getElementFromManifest($manifest);
+                if ($type == 'component') {
+                    // Define component path.
+                    define('JPATH_COMPONENT', JPATH_BASE . '/components/' . $element);
+                    define('JPATH_COMPONENT_SITE', JPATH_SITE . '/components/' . $element);
+                    define('JPATH_COMPONENT_ADMINISTRATOR', JPATH_ADMINISTRATOR . '/components/' . $element);
+                }
             }
             
             require_once JPATH_BASE . '/includes/framework.php';
