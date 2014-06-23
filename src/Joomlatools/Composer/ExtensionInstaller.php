@@ -84,9 +84,6 @@ class ExtensionInstaller extends LibraryInstaller
         
         $this->_componentPath($package);
         
-        $oldReporting = error_reporting();
-        error_reporting(E_ERROR | E_WARNING | E_PARSE);
-
         try {
             if(!$this->_application->install($this->getInstallPath($package)))
             {
@@ -107,8 +104,6 @@ class ExtensionInstaller extends LibraryInstaller
             . PHP_EOL . '[line]: ' . $exception->getLine()
             . '</error>' . PHP_EOL);
         }
-        
-        error_reporting($oldReporting);
     }
 
     /**
@@ -124,9 +119,6 @@ class ExtensionInstaller extends LibraryInstaller
         
         $this->_componentPath($package);
         
-        $oldReporting = error_reporting();
-        error_reporting(E_ERROR | E_WARNING | E_PARSE);
-
         try {
             if(!$this->_application->update($this->getInstallPath($target)))
             {
@@ -147,8 +139,6 @@ class ExtensionInstaller extends LibraryInstaller
             . PHP_EOL . '[line]: ' . $exception->getLine()
             . '</error>' . PHP_EOL);
         }
-        
-        error_reporting($oldReporting);        
     }
 
     /**
