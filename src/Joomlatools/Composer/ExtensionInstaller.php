@@ -81,6 +81,8 @@ class ExtensionInstaller extends LibraryInstaller
         $this->_setupExtmanSupport($package);
 
         $this->io->write('    <fg=cyan>Installing</fg=cyan> into Joomla'.PHP_EOL);
+        
+        $this->_componentPath($package);
 
         if(!$this->_application->install($this->getInstallPath($package)))
         {
@@ -106,6 +108,8 @@ class ExtensionInstaller extends LibraryInstaller
         $this->_setupExtmanSupport($target);
 
         $this->io->write('    <fg=cyan>Updating</fg=cyan> Joomla extension'.PHP_EOL);
+        
+        $this->_componentPath($package);
 
         if(!$this->_application->update($this->getInstallPath($target)))
         {
@@ -144,6 +148,25 @@ class ExtensionInstaller extends LibraryInstaller
             $type    = (string) $manifest->attributes()->type;
             $element = $this->_getElementFromManifest($manifest);
             
+            return !empty($element) ? $this->_application->hasExtension($element, $type) : false;
+        }
+
+        return false;
+    }
+    
+    /**
+     * @param PackageInterface $package
+     */
+    private function _componentPath(PackageInterface $package)
+    {
+        $installer = $this->_application->getInstaller();
+        $installer->setPath('source', $this->getInstallPath($package));
+        $manifest = $installer->getManifest();
+
+        if($manifest) {
+            $type    = (string) $manifest->attributes()->type;
+            $element = $this->_getElementFromManifest($manifest);
+
             if ($type == 'component') {
                 // Define component path.
                 if(!defined('JPATH_COMPONENT')) {
@@ -156,12 +179,8 @@ class ExtensionInstaller extends LibraryInstaller
                     define('JPATH_COMPONENT_ADMINISTRATOR', JPATH_ADMINISTRATOR . '/components/' . $element);
                 }
             }
-            
-            return !empty($element) ? $this->_application->hasExtension($element, $type) : false;
         }
-
-        return false;
-    }
+    }    
 
     /**
      * Bootstraps the Joomla application
