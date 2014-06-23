@@ -169,20 +169,15 @@ class ExtensionInstaller extends LibraryInstaller
 
             if ($type == 'component') {
                 // Define component path.
-                if(defined('JPATH_COMPONENT')) {
-                    runkit_constant_remove('JPATH_COMPONENT');
+                if(!defined('JPATH_COMPONENT')) {
+                    define('JPATH_COMPONENT', JPATH_BASE . '/components/' . $element);
                 }
-                define('JPATH_COMPONENT', JPATH_BASE . '/components/' . $element);
-                
-                if(defined('JPATH_COMPONENT_SITE')) {
-                    runkit_constant_remove('JPATH_COMPONENT_SITE');    
+                if(!defined('JPATH_COMPONENT_SITE')) {
+                    define('JPATH_COMPONENT_SITE', JPATH_SITE . '/components/' . $element);
                 }
-                define('JPATH_COMPONENT_SITE', JPATH_SITE . '/components/' . $element);
-                
-                if(defined('JPATH_COMPONENT_ADMINISTRATOR')) {
-                    runkit_constant_remove('JPATH_COMPONENT_ADMINISTRATOR');        
+                if(!defined('JPATH_COMPONENT_ADMINISTRATOR')) {
+                    define('JPATH_COMPONENT_ADMINISTRATOR', JPATH_ADMINISTRATOR . '/components/' . $element);
                 }
-                define('JPATH_COMPONENT_ADMINISTRATOR', JPATH_ADMINISTRATOR . '/components/' . $element);
             }
         }
     }    
