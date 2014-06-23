@@ -84,17 +84,21 @@ class ExtensionInstaller extends LibraryInstaller
         
         $this->_componentPath($package);
 
-        if(!$this->_application->install($this->getInstallPath($package)))
-        {
-            // Get all error messages that were stored in the message queue
-            $descriptions = $this->_getApplicationMessages();
+        try {
+            if(!$this->_application->install($this->getInstallPath($package)))
+            {
+                // Get all error messages that were stored in the message queue
+                $descriptions = $this->_getApplicationMessages();
 
-            $error = 'Error while installing '.$package->getPrettyName();
-            if(count($descriptions)) {
-                $error .= ':'.PHP_EOL.implode(PHP_EOL, $descriptions);
+                $error = 'Error while installing '.$package->getPrettyName();
+                if(count($descriptions)) {
+                    $error .= ':'.PHP_EOL.implode(PHP_EOL, $descriptions);
+                }
+
+                throw new \RuntimeException($error);
             }
-
-            throw new \RuntimeException($error);
+        } catch(\Exception $exception) {
+            $this->io->write('<error>[' . $package->getPrettyName(). ']: ' . $exception->getMessage() . '</error>'.PHP_EOL);
         }
     }
 
@@ -111,17 +115,21 @@ class ExtensionInstaller extends LibraryInstaller
         
         $this->_componentPath($package);
 
-        if(!$this->_application->update($this->getInstallPath($target)))
-        {
-            // Get all error messages that were stored in the message queue
-            $descriptions = $this->_getApplicationMessages();
+        try {
+            if(!$this->_application->update($this->getInstallPath($target)))
+            {
+                // Get all error messages that were stored in the message queue
+                $descriptions = $this->_getApplicationMessages();
 
-            $error = 'Error while updating '.$target->getPrettyName();
-            if(count($descriptions)) {
-                $error .= ':'.PHP_EOL.implode(PHP_EOL, $descriptions);
+                $error = 'Error while updating '.$target->getPrettyName();
+                if(count($descriptions)) {
+                    $error .= ':'.PHP_EOL.implode(PHP_EOL, $descriptions);
+                }
+
+                throw new \RuntimeException($error);
             }
-
-            throw new \RuntimeException($error);
+        } catch(\Exception $exception) {
+            $this->io->write('<error>[' . $package->getPrettyName(). ']: ' . $exception->getMessage() . '</error>'.PHP_EOL);
         }
     }
 
