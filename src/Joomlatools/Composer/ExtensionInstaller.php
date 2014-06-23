@@ -83,6 +83,9 @@ class ExtensionInstaller extends LibraryInstaller
         $this->io->write('    <fg=cyan>Installing</fg=cyan> into Joomla'.PHP_EOL);
         
         $this->_componentPath($package);
+        
+        $oldReporting = error_reporting();
+        error_reporting(0);
 
         try {
             if(!$this->_application->install($this->getInstallPath($package)))
@@ -104,6 +107,8 @@ class ExtensionInstaller extends LibraryInstaller
             . PHP_EOL . '[line]: ' . $exception->getLine()
             . '</error>' . PHP_EOL);
         }
+        
+        error_reporting($oldReporting);
     }
 
     /**
@@ -118,6 +123,9 @@ class ExtensionInstaller extends LibraryInstaller
         $this->io->write('    <fg=cyan>Updating</fg=cyan> Joomla extension'.PHP_EOL);
         
         $this->_componentPath($package);
+        
+        $oldReporting = error_reporting();
+        error_reporting(0);
 
         try {
             if(!$this->_application->update($this->getInstallPath($target)))
@@ -139,6 +147,8 @@ class ExtensionInstaller extends LibraryInstaller
             . PHP_EOL . '[line]: ' . $exception->getLine()
             . '</error>' . PHP_EOL);
         }
+        
+        error_reporting($oldReporting);        
     }
 
     /**
