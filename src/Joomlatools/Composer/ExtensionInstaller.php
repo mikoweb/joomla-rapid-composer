@@ -98,7 +98,11 @@ class ExtensionInstaller extends LibraryInstaller
                 throw new \RuntimeException($error);
             }
         } catch(\Exception $exception) {
-            $this->io->write('<error>[' . $package->getPrettyName(). ']: ' . $exception->getMessage() . '</error>'.PHP_EOL);
+            $this->io->write('<error>[' . $package->getPrettyName(). ']: '
+            . $exception->getMessage() 
+            . PHP_EOL . '[file]: ' . $exception->getFile()
+            . PHP_EOL . '[line]: ' . $exception->getLine()
+            . '</error>' . PHP_EOL);
         }
     }
 
@@ -129,7 +133,11 @@ class ExtensionInstaller extends LibraryInstaller
                 throw new \RuntimeException($error);
             }
         } catch(\Exception $exception) {
-            $this->io->write('<error>[' . $package->getPrettyName(). ']: ' . $exception->getMessage() . '</error>'.PHP_EOL);
+            $this->io->write('<error>[' . $package->getPrettyName(). ']: '
+            . $exception->getMessage() 
+            . PHP_EOL . '[file]: ' . $exception->getFile()
+            . PHP_EOL . '[line]: ' . $exception->getLine()
+            . '</error>' . PHP_EOL);
         }
     }
 
