@@ -85,7 +85,7 @@ class ExtensionInstaller extends LibraryInstaller
         $this->_componentPath($package);
         
         $oldReporting = error_reporting();
-        error_reporting(E_ALL & ~E_NOTICE);
+        error_reporting(0);
 
         try {
             if(!$this->_application->install($this->getInstallPath($package)))
@@ -125,7 +125,7 @@ class ExtensionInstaller extends LibraryInstaller
         $this->_componentPath($package);
         
         $oldReporting = error_reporting();
-        error_reporting(E_ALL & ~E_NOTICE);
+        error_reporting(0);
 
         try {
             if(!$this->_application->update($this->getInstallPath($target)))
