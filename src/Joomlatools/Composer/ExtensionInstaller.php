@@ -156,20 +156,24 @@ class ExtensionInstaller extends LibraryInstaller
     {
         $installer = $this->_application->getInstaller();
         $installer->setPath('source', $this->getInstallPath($package));
-
-        $manifest = $installer->getManifest();
-
+    
+        try {
+            $manifest = $installer->getManifest();
+        } catch (\Exception $e) {
+            $manifest = null;
+        }
+    
         if($manifest)
         {
             $type    = (string) $manifest->attributes()->type;
             $element = $this->getElementFromManifest($manifest);
-            
+    
             return !empty($element) ? $this->_application->hasExtension($element, $type) : false;
         }
-
+    
         return false;
     }
-    
+        
     /**
      * @param PackageInterface $package
      */
