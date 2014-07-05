@@ -307,6 +307,10 @@ class ExtensionInstaller extends LibraryInstaller
                     }
                 }
                 break;
+            case 'template':
+                $element = strtolower((string) $manifest->name);
+                $element = preg_replace('/[^A-Z0-9_\.-]/i', '', $element);                
+                break;                
             case 'component':
             default:
                 $element = strtolower((string) $manifest->name);
