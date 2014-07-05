@@ -68,7 +68,8 @@ class ExtensionInstaller extends LibraryInstaller
     public function getInstallPath(PackageInterface $package)
     {
         $config = $this->_config->get('joomla');
-        return (isset($config['basedir']) ? $config['basedir'] . '/' : '') . 'tmp/' . $package->getPrettyName();
+        //return (isset($config['basedir']) ? $config['basedir'] . '/' : '') . 'tmp/' . $package->getPrettyName();
+        return 'vendor/' . $package->getPrettyName();
     }
 
     /**
@@ -117,7 +118,7 @@ class ExtensionInstaller extends LibraryInstaller
 
         $this->io->write('    <fg=cyan>Updating</fg=cyan> Joomla extension'.PHP_EOL);
         
-        $this->_componentPath($package);
+        $this->_componentPath($target);
         
         try {
             if(!$this->_application->update($this->getInstallPath($target)))
@@ -133,7 +134,7 @@ class ExtensionInstaller extends LibraryInstaller
                 throw new \RuntimeException($error);
             }
         } catch(\Exception $exception) {
-            $this->io->write('<error>[' . $package->getPrettyName(). ']: '
+            $this->io->write('<error>[' . $target->getPrettyName(). ']: '
             . $exception->getMessage() 
             . PHP_EOL . '[file]: ' . $exception->getFile()
             . PHP_EOL . '[line]: ' . $exception->getLine()
