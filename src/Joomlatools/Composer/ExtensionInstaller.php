@@ -69,7 +69,7 @@ class ExtensionInstaller extends LibraryInstaller
     {
         $config = $this->_config->get('joomla');
         //return (isset($config['basedir']) ? $config['basedir'] . '/' : '') . 'tmp/' . $package->getPrettyName();
-        return 'vendor/' . $package->getPrettyName();
+        return 'tmp/' . $package->getPrettyName();
     }
 
     /**
