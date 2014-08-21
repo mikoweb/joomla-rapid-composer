@@ -1,16 +1,21 @@
 {
-    "name": "joomlatools/installer",
+    "name": "mikoweb/joomla-rapid-composer",
     "type": "composer-plugin",
     "license": "GPLv3",
     "description": "A Composer plugin to install Joomla extensions into your installation.",
     "keywords": ["joomla", "extension", "installer"],
-    "homepage": "https://github.com/joomlatools/joomla-composer",
+    "homepage": "https://github.com/mikoweb/joomla-rapid-composer",
     "authors": [
         {
             "name": "Joomlatools",
             "email": "info@joomlatools.com",
             "homepage": "https://www.joomlatools.com"
-        }
+        },
+        {
+            "name": "Rafał Mikołajun",
+            "email": "rafal@vision-web.pl",
+            "homepage": "http://www.vision-web.pl"
+        }        
     ],
     "autoload": {
         "psr-0": {"Joomlatools\\Composer\\": "src/"}
