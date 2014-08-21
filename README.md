@@ -24,7 +24,7 @@ Create the `composer.json` file in the root directory of your Joomla installatio
                     	"type": "tar"
                 	},
                 	"require": {
-                    	"joomlatools/installer": "*"
+                    	    "joomlatools/installer": "*"
                 	}
             	}
         	}
@@ -38,10 +38,10 @@ Create the `composer.json` file in the root directory of your Joomla installatio
 	
 Using this JSON file, we have now defined our own custom package. Pay attention to the following settings:
 
-* The `type` has to be set to `joomlatools-installer`
+* The `type` has to be set to `joomlatools/installer`
 * Make sure the `url` directive points to the location of the install package.
 
-Executing `composer install` will now fetch the `joomlatools/installer` plugin and use it to install the package into your Joomla installation.
+Executing `composer install` will now fetch the `mikoweb/joomla-rapid-composer` plugin and use it to install the package into your Joomla installation.
 
 For more information on creating these custom packages for projects which do not support Composer, see the [Composer docs](http://getcomposer.org/doc/05-repositories.md#package-2).
 
@@ -55,7 +55,7 @@ The package definition should contain the following basic information to make it
 {
     	"name": "vendor/my-extension",
     	"require": {
-        	"joomlatools/installer": "*"
+        	"mikoweb/joomla-rapid-composer": "*"
     	}
 }
 ```
@@ -77,9 +77,10 @@ If for some reason, you need to change the details of this mock user, you can ov
 {
     "config": {
         "joomla": {
+            "basedir": "joomla",
             "username": "johndoe",
-            "name":		 "John Doe",
-            "email": 	 "john@doe.com"
+            "name": "John Doe",
+            "email": "john@doe.com"
         }
     }
 }
@@ -96,11 +97,10 @@ Fork the project, create a feature branch, and send us a pull request.
 
 ## Authors
 
-See the list of [contributors](https://github.com/joomlatools/joomla-composer/contributors).
+See the list of [contributors](https://github.com/mikoweb/joomla-rapid-composer/contributors).
 
 ## License
 
 The `joomlatools/installer` plugin is licensed under the GPL v3 license - see the LICENSE file for details.
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/joomlatools/joomla-composer/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
