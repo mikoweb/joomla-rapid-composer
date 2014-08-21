@@ -4,6 +4,19 @@ This Composer plugin will install extensions into your Joomla setup.
 
 ## Usage
 
+### Quick start with [Joomla Startup](https://github.com/mikoweb/Joomla-Startup)
+Checkout repository:
+
+`svn co http://repo.mikoweb.pl/svn/joomla-startup/trunk ./`
+
+Attach a domain to `web` directory or create symbolic link to `public_html`:
+
+`ln -s web public_html`
+
+Run command:
+
+`php joomla.php joomla:install 3.3.*`
+
 ### Defining a package
 
 The easiest way to get started is by defining a custom package in your `composer.json`file.  All you need is the package file for the extension you wish to install. (ie. the installer file you downloaded from the vendor's website)
