@@ -160,6 +160,7 @@ class Application extends JApplicationCli
     public function update($path)
     {
         $installer = $this->getInstaller();
+        $installer->setOverwrite(true);
 
         return $installer->update($path);
     }
